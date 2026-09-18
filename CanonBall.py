@@ -11,7 +11,7 @@ def tap(x, y):
     if not inside(ball):
         ball.x = -199
         ball.y = -199
-        # MODIFICADO: Se reduce el divisor (25 -> 12) para dar mayor velocidad inicial al proyectil
+        # INTEGRANTE 1: Proyectil más rápido al disparar (divisor 25 -> 12)
         speed.x = (x + 200) / 12
         speed.y = (y + 200) / 12
 
@@ -41,11 +41,16 @@ def move():
         targets.append(target)
 
     for target in targets:
-        # MODIFICADO: Balones más rápidos (-0.5 -> -2.0)
+        # INTEGRANTE 1: Balones más rápidos (-0.5 -> -2.0)
         target.x -= 2.0
+        
+        # INTEGRANTE 2: Reposicionar balón al salir por la izquierda
+        if target.x < -200:
+            target.x = 200
+            target.y = randrange(-150, 150)
 
     if inside(ball):
-        # MODIFICADO: Proyectil más rápido (gravedad mayor: -0.35 -> -0.7)
+        # INTEGRANTE 1: Proyectil más rápido en caída/movimiento (-0.35 -> -0.7)
         speed.y -= 0.7
         ball.move(speed)
 
@@ -58,9 +63,8 @@ def move():
 
     draw()
 
-    for target in targets:
-        if not inside(target):
-            return
+    # INTEGRANTE 2: Se elimina la verificación 'if not inside(target): return' 
+    # para que el juego sea infinito.
 
     ontimer(move, 50)
 
